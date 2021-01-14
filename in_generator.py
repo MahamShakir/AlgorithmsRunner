@@ -119,18 +119,47 @@ def rc():
             data = {"data": data}
             f.write(json.dumps(data))
 
+def coin():
+    ids = [168, 62]
+    for i in range(10):
+        index = randint(0,1)
+        lenarr = randint(0, 100)
+        data = {}
+        arr = []
+        while len(arr) < lenarr:
+            arr.append(randint(30, 100))
+        
+        data["coins"] = arr
+        data["money"] = ids[index]
+        with open("public/8_input/8-"+str(i)+".json", "w") as f:
+            data = {"data": data}
+            f.write(json.dumps(data))
 
-def input4():
-    lenarr = randint(0, 100)
-    arr = []
-    while len(arr) < lenarr-3:
-        arr.append(randint(30, 100))
-    arr.extend([0, 6, 2])
-    print(arr)
+
+def wb():
+    names = ['mahamshakir', 'mohammadareebsiddiqui']
+    string = 'abcdefghijklmnopqrstuvwxyz'
+
+    for i in range(10):
+        index = randint(0,1)
+        data = {}
+        dictionary = []
+        seq = ""
+        for j in range(len(names[index])):
+            wordlen = randint(5, 15)
+            while len(seq) < wordlen: 
+                strindex = randint(0,25)
+                seq += string[strindex]
+            dictionary.append(seq)
+            seq=""
+        
+        data["s"] = names[index]
+        data["wordDict"] = dictionary
+        with open("public/9_input/9-"+str(i)+".json", "w") as f:
+            data = {"data": data}
+            f.write(json.dumps(data))
 
 
-def input5():
-    strs = []
 
 lcs()
 scs()
@@ -140,3 +169,5 @@ mcm()
 ks01()
 partition()
 rc()
+coin()
+wb()

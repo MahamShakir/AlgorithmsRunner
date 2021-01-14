@@ -16,6 +16,8 @@ import mcm from './algorithms/mcm';
 import ks01 from './algorithms/ks01';
 import partition from './algorithms/partition';
 import rc from './algorithms/rc';
+import coin from './algorithms/coin';
+import wb from './algorithms/wb';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -109,9 +111,9 @@ export default function VerticalTabs({updateLogs, flushLogs, updateRun, updateOu
         <Tab label="Coin Change Problem" {...a11yProps(8)} />
         <Tab label="Word Break Problem" {...a11yProps(9)} />
       </Tabs>
-      <TabPanel value={value} index={0}>
 
-        <List component="nav" aria-label="main mailbox folders">
+      <TabPanel value={value} index={0}>
+        <List component="nav" aria-label="select algorithm">
           {Object.keys(files).map(file => {
             return (
                 <ListItem button onClick={() => {
@@ -128,11 +130,11 @@ export default function VerticalTabs({updateLogs, flushLogs, updateRun, updateOu
                 </ListItem>
             );
           })}
-
         </List>
       </TabPanel>
+
       <TabPanel value={value} index={1}>
-        <List component="nav" aria-label="main mailbox folders">
+        <List component="nav" aria-label="select algorithm">
           {Object.keys(files).map(file => {
             return (
                 <ListItem button onClick={() => {
@@ -149,11 +151,11 @@ export default function VerticalTabs({updateLogs, flushLogs, updateRun, updateOu
                 </ListItem>
             );
           })}
-
         </List>
       </TabPanel>
+
       <TabPanel value={value} index={2}>
-        <List component="nav" aria-label="main mailbox folders">
+        <List component="nav" aria-label="select algorithm">
           {Object.keys(files).map(file => {
             return (
                 <ListItem button onClick={() => {
@@ -168,11 +170,11 @@ export default function VerticalTabs({updateLogs, flushLogs, updateRun, updateOu
                 </ListItem>
             );
           })}
-
         </List>
       </TabPanel>
+
       <TabPanel value={value} index={3}>
-        <List component="nav" aria-label="main mailbox folders">
+        <List component="nav" aria-label="select algorithm">
           {Object.keys(files).map(file => {
             return (
                 <ListItem button onClick={() => {
@@ -189,11 +191,11 @@ export default function VerticalTabs({updateLogs, flushLogs, updateRun, updateOu
                 </ListItem>
             );
           })}
-
         </List>
       </TabPanel>
+
       <TabPanel value={value} index={4}>
-        <List component="nav" aria-label="main mailbox folders">
+        <List component="nav" aria-label="select algorithm">
           {Object.keys(files).map(file => {
             return (
                 <ListItem button onClick={() => {
@@ -211,8 +213,9 @@ export default function VerticalTabs({updateLogs, flushLogs, updateRun, updateOu
 
         </List>
       </TabPanel>
+
       <TabPanel value={value} index={5}>
-        <List component="nav" aria-label="main mailbox folders">
+        <List component="nav" aria-label="select algorithm">
           {Object.keys(files).map(file => {
             return (
                 <ListItem button onClick={() => {
@@ -230,11 +233,11 @@ export default function VerticalTabs({updateLogs, flushLogs, updateRun, updateOu
                 </ListItem>
             );
           })}
-
         </List>
       </TabPanel>
+
       <TabPanel value={value} index={6}>
-        <List component="nav" aria-label="main mailbox folders">
+        <List component="nav" aria-label="select algorithm">
           {Object.keys(files).map(file => {
             return (
                 <ListItem button onClick={() => {
@@ -249,11 +252,11 @@ export default function VerticalTabs({updateLogs, flushLogs, updateRun, updateOu
                 </ListItem>
             );
           })}
-
         </List>
       </TabPanel>
+
       <TabPanel value={value} index={7}>
-        <List component="nav" aria-label="main mailbox folders">
+        <List component="nav" aria-label="select algorithm">
           {Object.keys(files).map(file => {
             return (
                 <ListItem button onClick={() => {
@@ -270,14 +273,47 @@ export default function VerticalTabs({updateLogs, flushLogs, updateRun, updateOu
                 </ListItem>
             );
           })}
-
         </List>
       </TabPanel>
+
       <TabPanel value={value} index={8}>
-        Item Six
+        <List component="nav" aria-label="select algorithm">
+          {Object.keys(files).map(file => {
+            return (
+                <ListItem button onClick={() => {
+                  let {coins, money} = files[file];
+                  flushLogs();
+                  updateLogs("Selecting input...");
+                  updateLogs(`Available Coins: ${coins}`);
+                  updateLogs(`Change Required: ${money}`);
+                  updateLogs("");
+                  updateRun(() => coin(coins, money, updateLogs, updateOutput))
+                }}>
+                  <ListItemText primary={file} />
+                </ListItem>
+            );
+          })}
+        </List>
       </TabPanel>
+
       <TabPanel value={value} index={9}>
-        Item Seven
+        <List component="nav" aria-label="select algorithm">
+          {Object.keys(files).map(file => {
+            return (
+                <ListItem button onClick={() => {
+                  let {s, wordDict} = files[file];
+                  flushLogs();
+                  updateLogs("Selecting input...");
+                  updateLogs(`Name: ${s}`);
+                  updateLogs(`Dictionary: ${wordDict}`);
+                  updateLogs("");
+                  updateRun(() => wb(s, wordDict, updateLogs, updateOutput))
+                }}>
+                  <ListItemText primary={file} />
+                </ListItem>
+            );
+          })}
+        </List>
       </TabPanel>
     </div>
   );

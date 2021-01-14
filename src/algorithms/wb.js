@@ -1,4 +1,4 @@
-function wordBreak(s, wordDict){
+export default function wordBreak(s, wordDict, updateLogs, updateOutput){
     if(!wordDict) return false;
       
   //Create a DP table of len(s) elements, and set true when if mark index i when s(i) is a word that can be formed from wordDict
@@ -16,7 +16,7 @@ function wordBreak(s, wordDict){
         }
       }
     }
+
+    updateOutput(`${Boolean(dp[s.length]) ? "Possible to Break Word" : "Word Not Breakable"} `)
     return Boolean(dp[s.length]);
   };
-
-  console.log(wordBreak("mahamshakir", ['maha', 'm', 'sha']));

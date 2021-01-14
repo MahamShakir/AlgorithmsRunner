@@ -10,7 +10,7 @@ import PlayCircleFilledWhiteIcon from '@material-ui/icons/PlayCircleFilledWhite'
 
 function App() {
   let [logs, setLogs] = useState([]);
-  let [onRun, setOnRun] = useState({"fn": () => alert("a")});
+  let [onRun, setOnRun] = useState({"fn": () => alert("Please Select an Algorithm First")});
   let [output, setOutput] = useState();
 
   function flushLogs() {

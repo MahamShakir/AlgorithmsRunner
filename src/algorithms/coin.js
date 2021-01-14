@@ -1,31 +1,41 @@
-function coinChange(S, N)
-{
-    // if total is 0, no coins are needed
-    if (N == 0)
-        return 0;
- 
-    // return INFINITY if total become negative
-    if (N < 0)
-        return Number.MAX_SAFE_INTEGER;
- 
-    // initialize minimum number of coins needed to infinity
-    var coins = Number.MAX_SAFE_INTEGER;
- 
-    // do for each coin
-    for (var i = 0; i < S.length; i++)
-    {
-        // recur to see if total can be reached by including
-        // current coin S[i]
-        var res = coinChange(S, N - S[i]);
- 
-        // update minimum number of coins needed if choosing current
-        // coin resulted in solution
-        if (res != Number.MAX_SAFE_INTEGER)
-            coins = Math.min(coins, res + 1);
+export default function coin(S, n, updateLogs, updateOutput) { 
+    let i, j, x, y; 
+    const m = S.length;
+  
+    // We need n+1 rows as the table  
+    // is constructed in bottom up 
+    // manner using the base case 0 
+    // value case (n = 0) 
+    let table = []
+    for (i = 0; i<n+1; i++){
+        table[i] = []
+        for(j = 0; j<m; j++){
+            table[i][j] = 0
+        }
     }
- 
-    // return minimum number of coins needed
-    return coins;
-}
+      
+    // Fill the enteries for 0 
+    // value case (n = 0) 
+    for (i = 0; i < m; i++) 
+        table[0][i] = 1; 
+  
+    // Fill rest of the table entries  
+    // in bottom up manner  
+    for (i = 1; i < n + 1; i++) 
+    { 
+        for (j = 0; j < m; j++) 
+        { 
+            // Count of solutions including S[j] 
+            x = (i-S[j] >= 0) ? table[i - S[j]][j] : 0; 
+  
+            // Count of solutions excluding S[j] 
+            y = (j >= 1) ? table[i][j - 1] : 0; 
+  
+            // total count 
+            table[i][j] = x + y; 
+        } 
+    } 
 
-console.log(coinChange([1,3,5,7], 15));
+    updateOutput(`Number of Possible ways: ${table[n][m - 1]}`)
+    return table[n][m - 1]; 
+} 
